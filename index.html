@@ -31,7 +31,6 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
-        <script src="js/multi-style-layer.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -69,7 +68,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[8.832150112974169,104.42393789298087],[10.375035381767056,107.6360881112869]]);
+        }).fitBounds([[9.157314499827278,105.15983624217475],[9.928757134223721,106.76591135132776]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -466,19 +465,24 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['MED_DESCRI'] !== null ? autolinker.link(String(feature.properties['MED_DESCRI']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">MED_DESCRI</th>\
+                        <td class="visible-with-data" id="MED_DESCRI">' + (feature.properties['MED_DESCRI'] !== null ? autolinker.link(String(feature.properties['MED_DESCRI']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['RTT_DESCRI'] !== null ? autolinker.link(String(feature.properties['RTT_DESCRI']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">RTT_DESCRI</th>\
+                        <td class="visible-with-data" id="RTT_DESCRI">' + (feature.properties['RTT_DESCRI'] !== null ? autolinker.link(String(feature.properties['RTT_DESCRI']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['F_CODE_DES'] !== null ? autolinker.link(String(feature.properties['F_CODE_DES']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">F_CODE_DES</th>\
+                        <td class="visible-with-data" id="F_CODE_DES">' + (feature.properties['F_CODE_DES'] !== null ? autolinker.link(String(feature.properties['F_CODE_DES']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ISO'] !== null ? autolinker.link(String(feature.properties['ISO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">ISO</th>\
+                        <td class="visible-with-data" id="ISO">' + (feature.properties['ISO'] !== null ? autolinker.link(String(feature.properties['ISO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ISOCOUNTRY'] !== null ? autolinker.link(String(feature.properties['ISOCOUNTRY']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">ISOCOUNTRY</th>\
+                        <td class="visible-with-data" id="ISOCOUNTRY">' + (feature.properties['ISOCOUNTRY'] !== null ? autolinker.link(String(feature.properties['ISOCOUNTRY']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -492,45 +496,26 @@
             return {
                 pane: 'pane_nggiaothng_3',
                 opacity: 1,
-                color: 'rgba(134,134,134,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'round',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        function style_nggiaothng_3_1() {
-            return {
-                pane: 'pane_nggiaothng_3',
-                opacity: 1,
-                color: 'rgba(134,134,134,1.0)',
+                color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        function style_nggiaothng_3_2() {
-            return {
-                pane: 'pane_nggiaothng_3',
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_nggiaothng_3');
         map.getPane('pane_nggiaothng_3').style.zIndex = 403;
         map.getPane('pane_nggiaothng_3').style['mix-blend-mode'] = 'normal';
-        var layer_nggiaothng_3 = new L.geoJson.multiStyle(json_nggiaothng_3, {
+        var layer_nggiaothng_3 = new L.geoJson(json_nggiaothng_3, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_nggiaothng_3',
             layerName: 'layer_nggiaothng_3',
             pane: 'pane_nggiaothng_3',
             onEachFeature: pop_nggiaothng_3,
-            styles: [style_nggiaothng_3_0,style_nggiaothng_3_1,style_nggiaothng_3_2,]
+            style: style_nggiaothng_3_0,
         });
         bounds_group.addLayer(layer_nggiaothng_3);
         map.addLayer(layer_nggiaothng_3);
@@ -883,7 +868,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"OLD": "real","PHAN HANG": "str","Huyện x�": "str","AGE": "str"};
+        var Filters = {"OLD": "real","Huyện x�": "str","PHAN HANG": "str","AGE": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -1020,38 +1005,6 @@
             });
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_PHANHANG = document.createElement('div');
-            div_PHANHANG.id = "div_PHANHANG";
-            div_PHANHANG.className= "filterselect";
-            document.getElementById("menu").appendChild(div_PHANHANG);
-            sel_PHANHANG = document.createElement('select');
-            sel_PHANHANG.multiple = true;
-            sel_PHANHANG.size = 3;
-            sel_PHANHANG.id = "sel_PHANHANG";
-            var PHANHANG_options_str = "<option value='' unselected></option>";
-            sel_PHANHANG.onchange = function(){filterFunc()};
-            PHANHANG_options_str  += '<option value="chưa xếp hạng">chưa xếp hạng</option>';
-            PHANHANG_options_str  += '<option value="cấp quốc gia">cấp quốc gia</option>';
-            PHANHANG_options_str  += '<option value="cấp tỉnh">cấp tỉnh</option>';
-            sel_PHANHANG.innerHTML = PHANHANG_options_str;
-            div_PHANHANG.appendChild(sel_PHANHANG);
-            var lab_PHANHANG = document.createElement('div');
-            lab_PHANHANG.innerHTML = 'PHAN HANG';
-            lab_PHANHANG.className = 'filterlabel';
-            div_PHANHANG.appendChild(lab_PHANHANG);
-            var reset_PHANHANG = document.createElement('div');
-            reset_PHANHANG.innerHTML = 'clear filter';
-            reset_PHANHANG.className = 'filterlabel';
-            reset_PHANHANG.onclick = function() {
-                var options = document.getElementById("sel_PHANHANG").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_PHANHANG.appendChild(reset_PHANHANG);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
             var div_Huynx = document.createElement('div');
             div_Huynx.id = "div_Huynx";
             div_Huynx.className= "filterselect";
@@ -1090,6 +1043,38 @@
                 filterFunc();
             };
             div_Huynx.appendChild(reset_Huynx);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_PHANHANG = document.createElement('div');
+            div_PHANHANG.id = "div_PHANHANG";
+            div_PHANHANG.className= "filterselect";
+            document.getElementById("menu").appendChild(div_PHANHANG);
+            sel_PHANHANG = document.createElement('select');
+            sel_PHANHANG.multiple = true;
+            sel_PHANHANG.size = 3;
+            sel_PHANHANG.id = "sel_PHANHANG";
+            var PHANHANG_options_str = "<option value='' unselected></option>";
+            sel_PHANHANG.onchange = function(){filterFunc()};
+            PHANHANG_options_str  += '<option value="chưa xếp hạng">chưa xếp hạng</option>';
+            PHANHANG_options_str  += '<option value="cấp quốc gia">cấp quốc gia</option>';
+            PHANHANG_options_str  += '<option value="cấp tỉnh">cấp tỉnh</option>';
+            sel_PHANHANG.innerHTML = PHANHANG_options_str;
+            div_PHANHANG.appendChild(sel_PHANHANG);
+            var lab_PHANHANG = document.createElement('div');
+            lab_PHANHANG.innerHTML = 'PHAN HANG';
+            lab_PHANHANG.className = 'filterlabel';
+            div_PHANHANG.appendChild(lab_PHANHANG);
+            var reset_PHANHANG = document.createElement('div');
+            reset_PHANHANG.innerHTML = 'clear filter';
+            reset_PHANHANG.className = 'filterlabel';
+            reset_PHANHANG.onclick = function() {
+                var options = document.getElementById("sel_PHANHANG").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_PHANHANG.appendChild(reset_PHANHANG);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_AGE = document.createElement('div');
